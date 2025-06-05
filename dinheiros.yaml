@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+data-de-emissao: 31/05/2025
+data-de-vencimento: 05/06/2025
+mes-de-emissao: 05/2025
+mes-de-vencimento-por-extenso: JUNHO DE 2025
+data-de-vencimento-dos-recibos: 25/05/2025
+data-de-pagamento-dos-recibos: 5 de junho de 2025
+
+# Daqui para baixo seguem os parâmetros de configuração,
+# que raramente mudam.
+
+banco-de-dados: cobranca.sqlite
+planilha-de-dados: dados.ods
+caminho-das-planilhas: situacao/
+caminho-dos-templates: templates/
+# libreoffice-python: /opt/libreoffice7.5/program/python
+libreoffice-python: /usr/bin/python
+libreoffice-uno: "libreoffice --headless --nologo \"--accept=socket,host=localhost,port=2002;urp;\" --calc "
+libreoffice-csv: "libreoffice --convert-to csv:\"Text - txt - csv (StarCalc)\":44,34,UTF8,1,,0,false,true,false,false,false,-1 "
+libreoffice-pdf: "libreoffice --convert-to pdf:writer_pdf_Export --outdir fichas "
+pdftk-para-planilhas: "pdftk fichas/*.pdf output planilhas.pdf"
+descricao-da-atualizacao:
+  AVISO: Mens. ~a (A.C.)
+  LBM: NF ~a - process. ~a
+  MINISTER: NF ~a - mens. ~a
+titulo-do-relatorio:
+  AVISO: RELATÓRIO DETALHADO DOS AVISOS DE COBRANÇA - ~a
+  LBM: RELATÓRIO DETALHADO DAS NOTAS FISCAIS DE PROCESSAMENTO - ~a
+  MINISTER: RELATÓRIO DETALHADO DAS NOTAS FISCAIS - ~a
+planilhas-para-email:
+  - {planilha: Adriana Martins Keder.ods, email: adrianamkeder@gmail.com}
+  - {planilha: Amanda.ods, email: ldgbrasil@gmail.com}
+  - {planilha: Anibal.ods, email: dois_corregos@yahoo.com.br}
+  - {planilha: Antonio Alberto Martins da Silva - ME.ods, email: alberto.yoshidam@gmail.com}
+  - {planilha: Canova.ods, email: tatyigorgb@hotmail.com}
+  - {planilha: Cl Prest Serv.ods, email: ibimaquinasme@gmail.com}
+  - {planilha: Debora.ods, email: financeiro@auaumania.com.br}
+  - {planilha: Divina.ods, email: dois_corregos@yahoo.com.br}
+  - {planilha: Dubom.ods, email: dubomjardinagem@yahoo.com.br}
+  - {planilha: Feel Dance.ods, email: olgalaranil@gmail.com}
+  - {planilha: Ibifolhas.ods, email: rumykawai@hotmail.com}
+  - {planilha: Iraci.ods, email: tatyigorgb@hotmail.com}
+  - {planilha: Jose Oderli.ods, email: triade@triadecosmeticosnaturais.com.br}
+  - {planilha: Leandro 1 Matriz.ods, email: siqueiraiara244@gmail.com}
+  - {planilha: Leandro 2 Filial.ods, email: siqueiraiara244@gmail.com}
+  - {planilha: Lionsoft.ods, email: jessica@lionsoft.com.br}
+  - {planilha: Luciana Godinho da Silva Almeida.ods, email: LUCIANA_GODINHO@hotmail.com}
+  - {planilha: Manoel Campos Filho.ods, email: dubomjardinagem.rj@gmail.com}
+  - {planilha: Marina Korte.ods, email: marinakorte@gmail.com}
+  - {planilha: Mcb Odontologia.ods, email: mcbassan@hotmail.com}
+  - {planilha: Rd Kawai.ods, email: rumykawai@hotmail.com}
+  - {planilha: Rv de Oliveira Clinica Odontologica.ods, email: fiorettisergio2106@gmail.com}
+  - {planilha: Rga.ods, email: arthur.ragusa@gmail.com}
+  - {planilha: Tech System.ods, email: adm@tsystemsolucoes.com.br}
+  - {planilha: Palemad.ods, email: pallemad@gmail.com}
+  - {planilha: Wrs - Topografia Automatizada e Plotagens SC Ltda..ods, email: wilrodrisil57@gmail.com}
+
+...
+
