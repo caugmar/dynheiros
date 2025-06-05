@@ -95,4 +95,3 @@ def em_reais(numero):
         if inteiros == 1:
             return f"um real e {dezena(centavos)} centavos"
         return f"{milhar(inteiros)} reais e {dezena(centavos)} centavos"
-

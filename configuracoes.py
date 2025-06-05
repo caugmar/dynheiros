@@ -62,4 +62,3 @@ caminho_das_planilhas = _CONFS.get("caminho-das-planilhas")
 pdftk_para_planilhas = _CONFS.get("pdftk-para-planilhas")
 
 caminho_dos_templates = _CONFS.get("caminho-dos-templates")
-
