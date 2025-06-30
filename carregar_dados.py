@@ -4,6 +4,10 @@ import subprocess
 from banco_de_dados import Empresa, Lancamento
 from configuracoes import libreoffice_csv, planilha_de_dados
 
+tipos = []
+empresas = []
+lancamentos = []
+
 def salvar_para_csv():
     comando = f"{libreoffice_csv} {planilha_de_dados}"
     try:
@@ -48,6 +52,7 @@ def carregar_dados():
                                                  reg[3], como_numero(reg[4])))
     tipos = sorted(list(set(lancamento.modelo for lancamento in lancamentos)))
     excluir_csv()
+    return empresas, lancamentos, tipos
 
 def obter_empresa_por_codigo(codigo):
     for emp in empresas:
@@ -62,11 +67,7 @@ def obter_empresa_por_nome(nome):
     return None
 
 def obter_lancamentos_por_tipo_e_codigo(tipo, codigo):
-    return [
-        lanc for lanc in lancamentos
-        if lanc.modelo == tipo and lanc.nome == codigo
-    ]
+    return [lanc for lanc in lancamentos if lanc.modelo == tipo and lanc.nome == codigo]
 
 def empresas_ativas(tipo):
-    return list(set(lancamento.nome for lancamento in lancamentos 
-                    if lancamento.modelo == tipo))
+    return sorted(list(set(lanc.nome for lanc in lancamentos if lanc.modelo == tipo)))
