@@ -1,21 +1,9 @@
 import yaml
 import os
 
-# Define the path to your YAML configuration file
 _CONFIG_FILE = "dinheiros.yaml"
-
-# Load the YAML configuration once when the module is imported
-try:
-    with open(_CONFIG_FILE, 'r', encoding='utf-8') as f:
-        _CONFS = yaml.safe_load(f)
-except FileNotFoundError:
-    print(f"Error: Configuration file '{_CONFIG_FILE}' not found. Please create it.")
-    _CONFS = {} # Initialize as empty to prevent further errors
-except yaml.YAMLError as e:
-    print(f"Error parsing YAML file '{_CONFIG_FILE}': {e}")
-    _CONFS = {} # Initialize as empty
-
-# --- Configuration Access Functions ---
+with open(_CONFIG_FILE, 'r', encoding='utf-8') as f:
+    _CONFS = yaml.safe_load(f)
 
 data_de_emissao = _CONFS.get("data-de-emissao")
 
@@ -30,17 +18,10 @@ data_de_vencimento_dos_recibos = _CONFS.get("data-de-vencimento-dos-recibos")
 data_de_pagamento_dos_recibos = _CONFS.get("data-de-pagamento-dos-recibos")
 
 def descricao_da_atualizacao(tipo):
-    """
-    Returns a specific update description based on 'tipo' from the config.
-    Example: config['descricao-da-atualizacao']['some_type']
-    """
+    
     return _CONFS.get("descricao-da-atualizacao", {}).get(tipo)
 
 def titulo_do_relatorio(tipo):
-    """
-    Returns a specific report title based on 'tipo' from the config.
-    Example: config['titulo-do-relatorio']['another_type']
-    """
     return _CONFS.get("titulo-do-relatorio", {}).get(tipo)
 
 planilhas_para_email = _CONFS.get("planilhas-para-email")

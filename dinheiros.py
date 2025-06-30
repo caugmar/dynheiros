@@ -5,22 +5,12 @@ import os
 import shutil
 import glob
 from datetime import date
+from configuracoes import data_de_emissao, data_de_vencimento, libreoffice_pdf
+from configuracoes import caminho_das_planilhas, pdftk_para_planilhas
+from gerar_documentos import gerar_documentos
 
 # Assumindo a existência dessas funções/módulos, similar ao Racket
 # Substitua por implementações reais conforme necessário
-
-def data_de_emissao():
-    """Retorna a data de emissão (ex: primeiro dia do mês atual)."""
-    return date.today().replace(day=1)
-
-def data_de_vencimento():
-    """Retorna a data de vencimento (ex: 7 dias após a emissão)."""
-    return data_de_emissao() # Apenas um placeholder, ajuste conforme a lógica do Racket
-
-def gerar_documentos(data_emissao, data_vencimento):
-    print(f"  Gerando documentos para emissão em {data_emissao} e vencimento em {data_vencimento}...")
-    # Lógica para gerar documentos no banco de dados
-    pass
 
 def emitir_documentos(data_emissao):
     print(f"  Emitindo notas fiscais em PDF para {data_emissao}...")
@@ -41,18 +31,6 @@ def atualizar_todas_as_planilhas(data_emissao):
     print(f"  Atualizando planilhas dos clientes com a nova cobrança para {data_emissao}...")
     # Lógica para atualizar planilhas
     pass
-
-def libreoffice_pdf():
-    """Retorna o comando para gerar PDF via LibreOffice."""
-    return "libreoffice --headless --convert-to pdf "
-
-def caminho_das_planilhas():
-    """Retorna o caminho base das planilhas."""
-    return "/caminho/para/suas/planilhas/" # Ajuste este caminho
-
-def pdftk_para_planilhas():
-    """Retorna o comando pdftk para juntar PDFs."""
-    return "pdftk fichas/*.pdf cat output fichas/todas_as_planilhas.pdf"
 
 def gerar_pdfs_e_enviar_emails():
     print("  Gerando PDFs e enviando e-mails...")
