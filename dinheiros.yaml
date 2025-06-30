@@ -1,11 +1,11 @@
 %YAML 1.2
 ---
-data-de-emissao: 31/05/2025
-data-de-vencimento: 05/06/2025
-mes-de-emissao: 05/2025
-mes-de-vencimento-por-extenso: JUNHO DE 2025
-data-de-vencimento-dos-recibos: 25/05/2025
-data-de-pagamento-dos-recibos: 5 de junho de 2025
+data-de-emissao: 30/06/2025
+data-de-vencimento: 05/07/2025
+mes-de-emissao: 06/2025
+mes-de-vencimento-por-extenso: JULHO DE 2025
+data-de-vencimento-dos-recibos: 25/06/2025
+data-de-pagamento-dos-recibos: 5 de julho de 2025
 
 # Daqui para baixo seguem os parâmetros de configuração,
 # que raramente mudam.
@@ -29,11 +29,13 @@ titulo-do-relatorio:
   LBM: RELATÓRIO DETALHADO DAS NOTAS FISCAIS DE PROCESSAMENTO - ~a
   MINISTER: RELATÓRIO DETALHADO DAS NOTAS FISCAIS - ~a
 planilhas-para-email:
+  - {planilha: Acos Dias.ods, email: acosdias@gmail.com}
   - {planilha: Adriana Martins Keder.ods, email: adrianamkeder@gmail.com}
   - {planilha: Amanda.ods, email: ldgbrasil@gmail.com}
   - {planilha: Anibal.ods, email: dois_corregos@yahoo.com.br}
   - {planilha: Antonio Alberto Martins da Silva - ME.ods, email: alberto.yoshidam@gmail.com}
   - {planilha: Canova.ods, email: tatyigorgb@hotmail.com}
+  - {planilha: Clinica Odontologica Hissao Takahashi.ods, email: hissataka@gmail.com}
   - {planilha: Cl Prest Serv.ods, email: ibimaquinasme@gmail.com}
   - {planilha: Debora.ods, email: financeiro@auaumania.com.br}
   - {planilha: Divina.ods, email: dois_corregos@yahoo.com.br}
