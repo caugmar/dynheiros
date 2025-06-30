@@ -17,8 +17,7 @@ def _gerar_pdf_da_planilha(caminho):
     subprocess.run(f'{libreoffice_pdf} "{caminho}"', shell=True, check=True)
 
 def gerar_pdfs():
-    envios = planilhas_para_email
-    planilhas = [e["planilha"] for e in envios]
+    planilhas = [e["planilha"] for e in planilhas_para_email]
     caminhos_completos = [_caminho_completo(p) for p in planilhas]
     for caminho in caminhos_completos:
         _gerar_pdf_da_planilha(caminho)
