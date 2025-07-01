@@ -18,11 +18,12 @@ data_de_vencimento_dos_recibos = _CONFS.get("data-de-vencimento-dos-recibos")
 data_de_pagamento_dos_recibos = _CONFS.get("data-de-pagamento-dos-recibos")
 
 def descricao_da_atualizacao(tipo):
-    
-    return _CONFS.get("descricao-da-atualizacao", {}).get(tipo)
+    desc = _CONFS.get("descricao-da-atualizacao", {}).get(tipo)
+    return desc.replace('~a', '{}')
 
 def titulo_do_relatorio(tipo):
-    return _CONFS.get("titulo-do-relatorio", {}).get(tipo)
+    titulo = _CONFS.get("titulo-do-relatorio", {}).get(tipo) 
+    return titulo.replace('~a', '{}')
 
 planilhas_para_email = _CONFS.get("planilhas-para-email")
 

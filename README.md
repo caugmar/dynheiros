@@ -1,6 +1,6 @@
 Estes módulos já estão funcionando: 
 
-- atualizar_planilha (falta mudar a formatação pro padrão Python)
+- atualizar_planilha
 - banco_de_dados
 - carregar_dados
 - configuracoes
