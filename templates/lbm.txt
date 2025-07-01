@@ -113,7 +113,7 @@
 |                                                  Líquido...R$ {{total   }}  |
 |                                                                            |
 |                                                                            |
-|  Recebemos da firma acima qualificada o valor líquido de R$ {{total   }}    |
+|  Recebemos  da  firma acima qualificada o valor líquido de R$ {{total   }}  |
 |  ({{extenso                                                           }}),  |
 |  referente à nossa Nota Fiscal Fatura de Serviços no. {{nffs}}, emitida em   |
 |  {{emissao}}.  Por ser verdade firmamos o presente, dando quitação do       |

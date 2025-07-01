@@ -26,10 +26,10 @@ def ajustar(texto, tamanho):
     """
     Ajusta o texto a um tamanho específico, truncando se for muito longo
     e preenchendo à esquerda com espaços se for muito curto.
-    Isso imita o comportamento de `~a #:min-width #:max-width` do Racket.
     """
     s_texto = str(texto)
-    # Preenche à esquerda (ljust) e depois trunca ([:tamanho])
+    if s_texto == "0": # Para quando item.quantidade for zero 
+        s_texto = " "
     return s_texto.ljust(tamanho)[:tamanho]
 
 def _posso_quebrar_em(texto, local):
@@ -80,19 +80,19 @@ def construir_contexto(documento, itens, end1, end2, total):
             "im": ajustar(documento.inscricao_municipal, 5),
             "q1": ajustar(itens[0].qtd, 4),
             "d1": ajustar(itens[0].descricao, 36),
-            "v1": ajustar(dinheiro(itens[0].valor), 11),
+            "v1": dinheiro(itens[0].valor).rjust(11),
             "q2": ajustar(itens[1].qtd, 4),
             "d2": ajustar(itens[1].descricao, 36),
-            "v2": ajustar(dinheiro(itens[1].valor), 11),
+            "v2": dinheiro(itens[1].valor).rjust(11),
             "q3": ajustar(itens[2].qtd, 4),
             "d3": ajustar(itens[2].descricao, 36),
-            "v3": ajustar(dinheiro(itens[2].valor), 11),
+            "v3": dinheiro(itens[2].valor).rjust(11),
             "q4": ajustar(itens[3].qtd, 4),
             "d4": ajustar(itens[3].descricao, 36),
-            "v4": ajustar(dinheiro(itens[3].valor), 11),
+            "v4": dinheiro(itens[3].valor).rjust(11),
             "emissao": ajustar(documento.data_de_emissao, 10),
             "vcto": ajustar(documento.data_de_vencimento, 10),
-            "total": ajustar(dinheiro(total), 11),
+            "total": dinheiro(total).rjust(11),
             "extenso": ajustar(em_reais(total), 69)}
 
 def _endereco(documento):

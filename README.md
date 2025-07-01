@@ -1,9 +1,9 @@
 Estes módulos já estão funcionando: 
 
-- emitir_notas (parcialmente, está com alinhamentos errados e zeros na quantidade)
 - banco_de_dados
 - carregar_dados
 - configuracoes
+- emitir_notas
 - enviar_emails
 - extensos
 - gerar_documentos
