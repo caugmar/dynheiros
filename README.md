@@ -1,5 +1,6 @@
 Estes módulos já estão funcionando: 
 
+- atualizar_planilha (falta mudar a formatação pro padrão Python)
 - banco_de_dados
 - carregar_dados
 - configuracoes
@@ -10,11 +11,9 @@ Estes módulos já estão funcionando:
 
 Estes scripts já eram Python no sistema antigo, continuam funcionando:
 - encerrar-libreoffice.py  
-- enviar-email.py  
 - inserir-linha.py
 
 Faltam ainda:
 
 - dinheiros (módulo principal, vai coordenar todo o resto)
-- atualizar_planilha
 - gerar_relatorios
