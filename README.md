@@ -1,5 +1,6 @@
 Estes módulos já estão funcionando: 
 
+- emitir_notas (parcialmente, está com alinhamentos errados e zeros na quantidade)
 - banco_de_dados
 - carregar_dados
 - configuracoes
@@ -16,5 +17,4 @@ Faltam ainda:
 
 - dinheiros (módulo principal, vai coordenar todo o resto)
 - atualizar_planilha
-- emitir_notas
 - gerar_relatorios

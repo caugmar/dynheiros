@@ -1,0 +1,101 @@
+<html>
+  <!--
+    Para converter em PDF, use:
+    cat relatorio.html | wkhtmltopdf -O Landscape \
+    --footer-line --footer-spacing 3 \
+    --footer-left "Emitido em [date] às [time]" \
+    --footer-right "Página [page] de [topage]" - relatorio.pdf
+  -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{titulo}}</title>
+    <style type="text/css">
+      body {
+        font-family: Verdana, Arial, Helvetica, sans;
+        font-size: 12pt;
+        overflow: visible !important;
+      }
+      h1 {
+        font-size: 16pt;
+      }
+      tr {
+            page-break-inside: avoid;
+      }
+      table {
+        border: 1px solid black;
+        font-size: 12pt;
+        border-collapse: collapse;
+      }
+      table td, table th {
+        text-align: right;
+        padding: 5px;
+        border: 1px solid black;
+      }
+      table th {
+        border-bottom: 3px solid black;
+      }
+      table tr.footer td {
+        border-top: 3px solid black;
+        font-weight: bold;
+      }
+      .left {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{titulo}}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th class="left">N.º</th>
+          <th class="left">Nome</th>
+          <th>Mens.</th>
+          <th>Qt.</th>
+          <th>Fiscais</th>
+          <th>Qt.</th>
+          <th>Trab.</th>
+          <th>Qt.</th>
+          <th>Xerox</th>
+          <th>Qt.</th>
+          <th>Outros</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#linhas}}
+        <tr>
+          <td class="left">{{numero}}</td>
+          <td class="left">{{nome}}</td>
+          <td>{{mensalidade}}</td>
+          <td>{{qt_fiscais}}</td>
+          <td>{{fiscais}}</td>
+          <td>{{qt_trabalhistas}}</td>
+          <td>{{trabalhistas}}</td>
+          <td>{{qt_xerox}}</td>
+          <td>{{xerox}}</td>
+          <td>{{qt_outros}}</td>
+          <td>{{outros}}</td>
+          <td>{{total}}</td>
+        </tr>
+        {{/linhas}}
+        <tr class="footer">
+          {{#totais}}
+          <td></td>
+          <td class="left">TOTAIS</td>
+          <td>{{mensalidade}}</td>
+          <td>{{qt_fiscais}}</td>
+          <td>{{fiscais}}</td>
+          <td>{{qt_trabalhistas}}</td>
+          <td>{{trabalhistas}}</td>
+          <td>{{qt_xerox}}</td>
+          <td>{{xerox}}</td>
+          <td>{{qt_outros}}</td>
+          <td>{{outros}}</td>
+          <td>{{total}}</td>
+          {{/totais}}
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
