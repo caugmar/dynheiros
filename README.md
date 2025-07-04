@@ -8,6 +8,7 @@ Estes módulos já estão funcionando:
 - enviar_emails
 - extensos
 - gerar_documentos
+- gerar_relatorios
 
 Estes scripts já eram Python no sistema antigo, continuam funcionando:
 - encerrar-libreoffice.py  
@@ -16,4 +17,3 @@ Estes scripts já eram Python no sistema antigo, continuam funcionando:
 Faltam ainda:
 
 - dinheiros (módulo principal, vai coordenar todo o resto)
-- gerar_relatorios
