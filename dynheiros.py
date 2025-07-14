@@ -45,7 +45,7 @@ def imprimir_planilhas():
     os.makedirs("fichas", exist_ok=True)
     letras = [chr(i) for i in range(ord('a'), ord('z'))]
     for letra in letras:
-        os.system(f"{libreoffice_pdf()} {caminho_das_planilhas()}{letra}/*.ods")
+        os.system(f"{libreoffice_pdf} {caminho_das_planilhas}{letra}/*.ods")
     os.system(pdftk_para_planilhas)
     print("Gerado.")
 

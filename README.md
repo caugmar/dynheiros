@@ -1,5 +1,6 @@
-Estes módulos já estão funcionando: 
+Todos os módulos funcionando:
 
+- dynheiros (módulo principal, vai coordenar todo o resto)
 - atualizar_planilha
 - banco_de_dados
 - carregar_dados
@@ -9,11 +10,9 @@ Estes módulos já estão funcionando:
 - extensos
 - gerar_documentos
 - gerar_relatorios
-
-Estes scripts já eram Python no sistema antigo, continuam funcionando:
-- encerrar-libreoffice.py  
+- encerrar-libreoffice.py
 - inserir-linha.py
 
-Faltam ainda:
+Antes de rodar pela primeira vez no mês que vem (agosto/2025), lembrar
+de copiar o banco de dados e as planilhas da versão anterior.
 
-- dinheiros (módulo principal, vai coordenar todo o resto)
