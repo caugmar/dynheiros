@@ -13,6 +13,3 @@ Todos os módulos funcionando:
 - encerrar-libreoffice.py
 - inserir-linha.py
 
-Antes de rodar pela primeira vez no mês que vem (agosto/2025), lembrar
-de copiar o banco de dados e as planilhas da versão anterior.
-
