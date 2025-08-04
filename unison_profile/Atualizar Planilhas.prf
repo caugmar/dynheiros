@@ -1,0 +1,5 @@
+# Unison preferences
+fat = true
+label = Sincroniza as planilhas do servidor com as locais
+root = /media/guto/dados/Fichas dos Clientes
+root = /home/guto/src/dynheiros/situacao
