@@ -1,11 +1,11 @@
 %YAML 1.2
 ---
-data-de-emissao: 31/07/2025
-data-de-vencimento: 05/08/2025
-mes-de-emissao: 07/2025
-mes-de-vencimento-por-extenso: AGOSTO DE 2025
-data-de-vencimento-dos-recibos: 25/07/2025
-data-de-pagamento-dos-recibos: 5 de agosto de 2025
+data-de-emissao: 31/08/2025
+data-de-vencimento: 05/09/2025
+mes-de-emissao: 08/2025
+mes-de-vencimento-por-extenso: SETEMBRO DE 2025
+data-de-vencimento-dos-recibos: 25/09/2025
+data-de-pagamento-dos-recibos: 5 de setembro de 2025
 
 # Daqui para baixo seguem os parâmetros de configuração,
 # que raramente mudam.
