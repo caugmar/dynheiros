@@ -34,10 +34,10 @@ def obter_argumentos():
 
 def sincronizar_planilhas():
     print("Sincronizando planilhas com o servidor...")
-    os.system("mount /media/guto/dados")
+    os.system("mount /media/guto/servidor")
     os.system("unison -auto -batch -ui text \"Atualizar Planilhas\"")
     os.system("sync")
-    os.system("umount /media/guto/dados")
+    os.system("umount /media/guto/servidor")
     print("Sincronizadas.")
 
 def imprimir_planilhas():
