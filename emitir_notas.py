@@ -2,25 +2,27 @@ import chevron
 import os
 import subprocess
 from banco_de_dados import (
-    ItemCobranca, DocCobranca, dinheiro, 
+    ItemCobranca, dinheiro,
     obter_documentos_por_tipo_e_data,
     obter_itens_de_cobranca_por_id_do_documento)
 from extensos import em_reais
 from carregar_dados import carregar_dados
-from configuracoes import caminho_dos_templates, data_de_emissao
+from configuracoes import caminho_dos_templates
 
-# --- Funções auxiliares que espelham o comportamento do Racket ---
 
 def procusto(lista):
     """
     Garante que a lista tenha exatamente 4 objetos ItemCobranca,
     preenchendo com itens vazios se necessário.
     """
-    # Cria um item de preenchimento. Assumimos que ItemCobranca(0, 0, "", "", 0)
-    # representa um item vazio para fins de preenchimento.
-    padding_item = ItemCobranca(id=0, documento=0, descricao="", qtd=0, valor=0.0)
+    # Cria um item de preenchimento. Assumimos que
+    # ItemCobranca(0, 0, "", "", 0) representa um item vazio
+    # para fins de preenchimento.
+    padding_item = ItemCobranca(
+        id=0, documento=0, descricao="", qtd=0, valor=0.0)
     padded_list = lista + [padding_item] * 4
     return padded_list[:4]
+
 
 def ajustar(texto, tamanho):
     """
@@ -28,9 +30,10 @@ def ajustar(texto, tamanho):
     e preenchendo à esquerda com espaços se for muito curto.
     """
     s_texto = str(texto)
-    if s_texto == "0": # Para quando item.quantidade for zero 
+    if s_texto == "0":  # Para quando item.quantidade for zero
         s_texto = " "
     return s_texto.ljust(tamanho)[:tamanho]
+
 
 def _posso_quebrar_em(texto, local):
     """
@@ -42,27 +45,33 @@ def _posso_quebrar_em(texto, local):
             return i
     return -1  # Nenhum espaço encontrado
 
+
 def quebrar(texto, local):
     """
     Quebra uma string em duas partes em uma posição 'local' especificada,
     priorizando a quebra em um espaço.
     """
     if local + 1 >= len(texto):
-        return [texto, ""]  # Se 'local' for o final ou além da string, retorna a string completa e uma vazia
+        # Se 'local' for o final ou além da string, retorna a string completa
+        # e uma vazia
+        return [texto, ""]
     posicao = _posso_quebrar_em(texto, local)
-    if posicao == -1:  # Se nenhum espaço for encontrado, quebra diretamente em 'local'
+    if posicao == -1:  # Se nenhum espaço for encontrado, quebra em 'local'
         return [texto[:local], texto[local:]]
     else:
         # Retorna a primeira parte até o espaço e a segunda parte após o espaço
         return [texto[:posicao], texto[posicao + 1:]]
 
+
 def _expandir_template(template, contexto):
     return chevron.render(template, contexto)
+
 
 def _limpar_arquivos_antigos():
     for f in ["notas.txt", "notas.ps", "notas.pdf"]:
         if os.path.exists(f):
             os.remove(f)
+
 
 def construir_contexto(documento, itens, end1, end2, total):
     return {"nome": ajustar(documento.nome, 52),
@@ -95,6 +104,7 @@ def construir_contexto(documento, itens, end1, end2, total):
             "total": dinheiro(total).rjust(11),
             "extenso": ajustar(em_reais(total), 69)}
 
+
 def _endereco(documento):
     tmp = f"{documento.logradouro}, {documento.numero}"
     if documento.complemento != "-":
@@ -103,23 +113,27 @@ def _endereco(documento):
     tmp += f" - {documento.estado} - CEP {documento.cep}"
     return tmp
 
+
 def _obter_template(tipo):
     nome_do_arquivo_template = f"{tipo.lower()}.txt"
-    caminho_template = os.path.join(caminho_dos_templates, nome_do_arquivo_template)
+    caminho_template = os.path.join(
+        caminho_dos_templates, nome_do_arquivo_template)
     template = ""
     with open(caminho_template, "r", encoding="utf-8") as f:
         template = f.read()
     return template
 
+
 def _pos_processamento():
     print("Convertendo notas.txt para latin1...")
     subprocess.run(["recode", "utf8..latin1", "notas.txt"], check=True)
     print("Gerando notas.ps...")
-    subprocess.run(["enscript", "--no-header", "--margins", "30:5:13:0", 
+    subprocess.run(["enscript", "--no-header", "--margins", "30:5:13:0",
                     "--font=Courier11.5", "-o", "notas.ps", "notas.txt"],
-                    check=True)
+                   check=True)
     print("Gerando notas.pdf...")
     subprocess.run(["ps2pdf", "notas.ps"], check=True)
+
 
 def emitir_documentos(emissao):
     print("Iniciando a emissão de documentos...")
@@ -130,12 +144,14 @@ def emitir_documentos(emissao):
             template = _obter_template(tipo)
             documentos = obter_documentos_por_tipo_e_data(tipo, emissao)
             for doc in documentos:
-                itens = procusto(obter_itens_de_cobranca_por_id_do_documento(doc.id))
+                itens = procusto(
+                    obter_itens_de_cobranca_por_id_do_documento(doc.id))
                 end1, end2 = quebrar(_endereco(doc), 48)
                 total = sum(item.valor for item in itens)
                 contexto = construir_contexto(doc, itens, end1, end2, total)
                 expandido = _expandir_template(template, contexto)
-                output_file.write(expandido) 
-                print(f"Conteúdo do documento {doc.id} ('{doc.nome}') adicionado a notas.txt.")
+                output_file.write(expandido)
+                print(f"Conteúdo do documento {doc.id} ('{
+                      doc.nome}') adicionado a notas.txt.")
     _pos_processamento()
     print("Geração de documentos concluída com sucesso.")
