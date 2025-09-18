@@ -13,3 +13,4 @@ Todos os módulos funcionando:
 - encerrar-libreoffice.py
 - inserir-linha.py
 
+O código foi checado e limpo.
