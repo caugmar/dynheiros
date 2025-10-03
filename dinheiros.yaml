@@ -1,11 +1,11 @@
 %YAML 1.2
 ---
-data-de-emissao: 31/08/2025
-data-de-vencimento: 05/09/2025
-mes-de-emissao: 08/2025
-mes-de-vencimento-por-extenso: SETEMBRO DE 2025
+data-de-emissao: 30/09/2025
+data-de-vencimento: 05/10/2025
+mes-de-emissao: 09/2025
+mes-de-vencimento-por-extenso: OUTUBRO DE 2025
 data-de-vencimento-dos-recibos: 25/09/2025
-data-de-pagamento-dos-recibos: 5 de setembro de 2025
+data-de-pagamento-dos-recibos: 5 de outubro de 2025
 
 # Daqui para baixo seguem os parâmetros de configuração,
 # que raramente mudam.
@@ -36,7 +36,7 @@ planilhas-para-email:
   - {planilha: Antonio Alberto Martins da Silva - ME.ods, email: alberto.yoshidam@gmail.com}
   - {planilha: Canova.ods, email: tatyigorgb@hotmail.com}
   - {planilha: Clinica Odontologica Hissao Takahashi.ods, email: hissataka@gmail.com}
-  - {planilha: Cl Prest Serv.ods, email: ibimaquinasme@gmail.com}
+  - {planilha: CL Prest Serv.ods, email: ibimaquinasme@gmail.com}
   - {planilha: Debora.ods, email: financeiro@auaumania.com.br}
   - {planilha: Divina.ods, email: dois_corregos@yahoo.com.br}
   - {planilha: Dubom.ods, email: dubomjardinagem@yahoo.com.br}
@@ -50,10 +50,10 @@ planilhas-para-email:
   - {planilha: Luciana Godinho da Silva Almeida.ods, email: LUCIANA_GODINHO@hotmail.com}
   - {planilha: Manoel Campos Filho.ods, email: dubomjardinagem.rj@gmail.com}
   - {planilha: Marina Korte.ods, email: marinakorte@gmail.com}
-  - {planilha: Mcb Odontologia.ods, email: mcbassan@hotmail.com}
-  - {planilha: Rd Kawai.ods, email: rumykawai@hotmail.com}
-  - {planilha: Rv de Oliveira Clinica Odontologica.ods, email: fiorettisergio2106@gmail.com}
-  - {planilha: Rga.ods, email: arthur.ragusa@gmail.com}
+  - {planilha: MCB Odontologia.ods, email: mcbassan@hotmail.com}
+  - {planilha: RD Kawai.ods, email: rumykawai@hotmail.com}
+  - {planilha: RV de Oliveira Clinica Odontologica.ods, email: fiorettisergio2106@gmail.com}
+  - {planilha: RGA.ods, email: arthur.ragusa@gmail.com}
   - {planilha: Tech System.ods, email: adm@tsystemsolucoes.com.br}
   - {planilha: Palemad.ods, email: pallemad@gmail.com}
   - {planilha: Wrs - Topografia Automatizada e Plotagens SC Ltda..ods, email: wilrodrisil57@gmail.com}

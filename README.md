@@ -1,3 +1,6 @@
+Planejar uma migração de htmltopdf para weasyprint.
+Quanto menos dependência de programas externos, melhor.
+
 Todos os módulos funcionando:
 
 - dynheiros (módulo principal, vai coordenar todo o resto)
