@@ -1,11 +1,11 @@
 %YAML 1.2
 ---
-data-de-emissao: 31/10/2025
-data-de-vencimento: 05/11/2025
-mes-de-emissao: 10/2025
-mes-de-vencimento-por-extenso: NOVEMBRO DE 2025
-data-de-vencimento-dos-recibos: 25/10/2025
-data-de-pagamento-dos-recibos: 5 de novembro de 2025
+data-de-emissao: 31/12/2025
+data-de-vencimento: 05/01/2026
+mes-de-emissao: 12/2025
+mes-de-vencimento-por-extenso: JANEIRO DE 2026
+data-de-vencimento-dos-recibos: 25/12/2025
+data-de-pagamento-dos-recibos: 5 de janeiro de 2026
 
 # Daqui para baixo seguem os parâmetros de configuração,
 # que raramente mudam.
