@@ -1,9 +1,8 @@
-Planejar uma migração de htmltopdf para weasyprint.
-Quanto menos dependência de programas externos, melhor.
+# Planejar migração para weasyprint
 
 Todos os módulos funcionando:
 
-- dynheiros (módulo principal, vai coordenar todo o resto)
+- dynheiros (módulo principal, coordena todo o resto)
 - atualizar_planilha
 - banco_de_dados
 - carregar_dados
