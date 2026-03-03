@@ -19,7 +19,7 @@ def arg(parser, short, long, helpmsg):
 
 def obter_argumentos():
     parser = argparse.ArgumentParser(
-        prog="pynheiros",
+        prog="dynheiros",
         description="Ferramenta para gerenciamento de cobranças."
     )
     arg(parser, "-g", "--gerar", "Gera os documentos de cobrança.")

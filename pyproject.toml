@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pynheiros"
+name = "dynheiros"
 version = "0.1.0"
 description = ""
 authors = ["Guto Marcicano <caugmar@gmail.com>"]
@@ -19,7 +19,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
-dev = [
-    "ipython (>=9.8.0,<10.0.0)",
-    "ptpython (>=3.0.32,<4.0.0)"
-]
+dev = ["ipython (>=9.8.0,<10.0.0)", "ptpython (>=3.0.32,<4.0.0)"]
