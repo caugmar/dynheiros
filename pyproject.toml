@@ -12,6 +12,7 @@ ipython = "^9.3.0"
 yagmail = "^0.15.293"
 chevron = "^0.14.0"
 bpython = "^0.26"
+weasyprint = "^69.0"
 
 
 [build-system]

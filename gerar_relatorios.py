@@ -9,6 +9,9 @@ from configuracoes import (mes_de_vencimento_por_extenso,
                            caminho_dos_templates,
                            data_de_vencimento_dos_recibos,
                            data_de_pagamento_dos_recibos)
+from weasyprint import HTML, CSS
+from datetime import datetime
+from string import Template
 import carregar_dados
 
 
@@ -27,37 +30,41 @@ def dinheiro(value):
 
 def html_para_pdf(nome_do_arquivo):
     """
-    Converte um arquivo HTML para PDF usando wkhtmltopdf.
-    Assume que 'wkhtmltopdf' está instalado e no PATH do sistema.
+    Converte um arquivo HTML para PDF usando a biblioteca WeasyPrint.
     """
     nome = nome_do_arquivo.lower()
-    command = (
-        f"wkhtmltopdf "
-        f"--orientation landscape "
-        f"--margin-left 20 "
-        f"--margin-bottom 20 "
-        f"--footer-line "
-        f"--footer-spacing 10 "
-        f"--footer-left [date] "
-        f"--footer-center '[page] de [topage]' "
-        f"--footer-right [time] "
-        f"{nome}.html "
-        f"{nome}.pdf"
-    )
-    print(f"DEBUG: Executando comando: {command}")
-    try:
-        subprocess.run(command, shell=True, check=True,
-                       capture_output=True, text=True)
-        print(f"PDF '{nome}.pdf' gerado com sucesso.")
-    except subprocess.CalledProcessError as e:
-        print(f"ERRO ao gerar PDF para {nome}:")
-        print(f"Stdout: {e.stdout}")
-        print(f"Stderr: {e.stderr}")
-        print(f"Código de saída: {e.returncode}")
-    except FileNotFoundError:
-        print("ERRO: 'wkhtmltopdf' não encontrado."
-              + " Certifique-se de que está instalado e no PATH.")
+    html_input = f"{nome}.html"
+    pdf_output = f"{nome}.pdf"
 
+    # Configuração de estilo para rodapés e margens
+    # O WeasyPrint utiliza CSS de página (Paged Media) para cabeçalhos/rodapés
+    data_atual = datetime.now().strftime("%d/%m/%Y")
+    hora_atual = datetime.now().strftime("%H:%M")
+    css = CSS(string=Template('''
+        @page {
+            size: A4 landscape;
+            margin: 20mm;
+            @bottom-left {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                content: "Data: $data";
+            }
+            @bottom-center {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                content: "Página " counter(page) " de " counter(pages);
+            }
+            @bottom-right {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                content: "Hora: $hora";
+            }
+        }
+    ''').substitute(data=data_atual, hora=hora_atual))
+
+    try:
+        # Carrega o HTML e gera o PDF
+        HTML(html_input).write_pdf(pdf_output, stylesheets=[css])
+        print(f"PDF '{pdf_output}' gerado com sucesso.")
+    except Exception as e:
+        print(f"ERRO ao gerar PDF para {nome}: {e}")
 
 def nova_linha(doc):
     return {
@@ -263,42 +270,44 @@ def emitir_relatorios(data_de_emissao):
         print(f"DEBUG: Arquivo HTML '{nome_do_arquivo_html}' gerado.")
         html_para_pdf(tipo)
 
+from weasyprint import HTML, CSS
+import os
 
 def emitir_recibos():
     """
-    Emite recibos (exemplo: recibo de aluguel).
+    Emite recibos (exemplo: recibo de aluguel) usando WeasyPrint.
     """
     print("\n--- Emitindo Recibos ---")
     contexto = {
         "vencimento": data_de_vencimento_dos_recibos,
         "pagamento": data_de_pagamento_dos_recibos,
     }
-    nome_do_arquivo_html = "aluguel.html"
-    template_path = os.path.join(caminho_dos_templates, nome_do_arquivo_html)
+    template_path = os.path.join(caminho_dos_templates, "aluguel.html")
 
     try:
         with open(template_path, "r", encoding="utf-8") as f:
             template = f.read()
     except FileNotFoundError:
-        print(f"ERRO: Template '{template_path}' não encontrado."
-              + " Certifique-se de que o arquivo existe.")
+        print(f"ERRO: Template '{template_path}' não encontrado.")
         return
 
+    # Renderiza o HTML usando Chevron
     rendered_html = chevron.render(template=template, data=contexto)
-
-    with open(nome_do_arquivo_html, "w", encoding="utf-8") as f:
-        f.write(rendered_html)
-    print(f"DEBUG: Arquivo HTML '{nome_do_arquivo_html}' gerado.")
+    
+    # Define o estilo do rodapé conforme discutido anteriormente
+    css = CSS(string='''
+        @page {
+            size: A4 portrait;
+            margin: 20mm;
+        }
+    ''')
 
     try:
-        subprocess.run(f"wkhtmltopdf {nome_do_arquivo_html} aluguel.pdf",
-                       shell=True, check=True, capture_output=True, text=True)
-        print("PDF 'aluguel.pdf' gerado com sucesso.")
-    except subprocess.CalledProcessError as e:
-        print("ERRO ao gerar PDF para aluguel:")
-        print(f"Stdout: {e.stdout}")
-        print(f"Stderr: {e.stderr}")
-        print(f"Código de saída: {e.returncode}")
-    except FileNotFoundError:
-        print("ERRO: 'wkhtmltopdf' não encontrado."
-              + " Certifique-se de que está instalado e no PATH.")
+        # Gera o PDF diretamente do string renderizado
+        HTML(string=rendered_html, base_url='.').write_pdf(
+            "aluguel.pdf", 
+            stylesheets=[css]
+        )
+        print("PDF 'aluguel.pdf' gerado com sucesso com WeasyPrint.")
+    except Exception as e:
+        print(f"ERRO ao gerar PDF para aluguel: {e}")
