@@ -1,3 +1,5 @@
+from weasyprint import HTML, CSS
+from configuracoes import caminho_dos_templates
 import chevron
 import os
 import subprocess
@@ -8,7 +10,6 @@ from banco_de_dados import (
 from extensos import em_reais
 from carregar_dados import carregar_dados
 from configuracoes import caminho_dos_templates
-
 
 def procusto(lista):
     """
@@ -115,7 +116,7 @@ def _endereco(documento):
 
 
 def _obter_template(tipo):
-    nome_do_arquivo_template = f"{tipo.lower()}.txt"
+    nome_do_arquivo_template = f"{tipo.lower()}.html"
     caminho_template = os.path.join(
         caminho_dos_templates, nome_do_arquivo_template)
     template = ""
@@ -124,34 +125,32 @@ def _obter_template(tipo):
     return template
 
 
-def _pos_processamento():
-    print("Convertendo notas.txt para latin1...")
-    subprocess.run(["recode", "utf8..latin1", "notas.txt"], check=True)
-    print("Gerando notas.ps...")
-    subprocess.run(["enscript", "--no-header", "--margins", "30:5:13:0",
-                    "--font=Courier11.5", "-o", "notas.ps", "notas.txt"],
-                   check=True)
-    print("Gerando notas.pdf...")
-    subprocess.run(["ps2pdf", "notas.ps"], check=True)
-
-
 def emitir_documentos(emissao):
-    print("Iniciando a emissão de documentos...")
-    _limpar_arquivos_antigos()
+    print("Iniciando a emissão de documentos via WeasyPrint...")
+    
+    # Lista para acumular o HTML de todos os documentos
+    html_acumulado = ""
     _, _, tipos = carregar_dados()
-    with open("notas.txt", "a", encoding="utf-8") as output_file:
-        for tipo in tipos:
-            template = _obter_template(tipo)
-            documentos = obter_documentos_por_tipo_e_data(tipo, emissao)
-            for doc in documentos:
-                itens = procusto(
-                    obter_itens_de_cobranca_por_id_do_documento(doc.id))
-                end1, end2 = quebrar(_endereco(doc), 48)
-                total = sum(item.valor for item in itens)
-                contexto = construir_contexto(doc, itens, end1, end2, total)
-                expandido = _expandir_template(template, contexto)
-                output_file.write(expandido)
-                print(f"Conteúdo do documento {doc.id} ('{
-                      doc.nome}') adicionado a notas.txt.")
-    _pos_processamento()
-    print("Geração de documentos concluída com sucesso.")
+
+    for tipo in tipos:
+        template = _obter_template(tipo) # O template agora deve ser HTML
+        documentos = obter_documentos_por_tipo_e_data(tipo, emissao)
+        
+        for doc in documentos:
+            itens = procusto(obter_itens_de_cobranca_por_id_do_documento(doc.id))
+            end1, end2 = quebrar(_endereco(doc), 48)
+            total = sum(item.valor for item in itens)
+            contexto = construir_contexto(doc, itens, end1, end2, total)
+            
+            # Concatena os documentos (cada um em uma página)
+            # Adicionamos uma div com quebra de página se necessário
+            html_acumulado += f'{_expandir_template(template, contexto)}'
+
+    # Estilização para garantir o visual de "nota"
+    css = CSS(string='''
+        body { font-family: 'Courier New', Courier, monospace; }
+    ''')
+
+    # Gera o PDF final único
+    HTML(string=html_acumulado, base_url='.').write_pdf("notas.pdf", stylesheets=[css])
+    print("PDF 'notas.pdf' gerado com sucesso sem dependências externas.")
